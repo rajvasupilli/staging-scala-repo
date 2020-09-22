@@ -5,7 +5,7 @@ pipeline {
             steps {
                 echo 'Installling the prerequisites!!!'
                 sh '''
-                      bash prereq.sh
+                      #bash prereq.sh
                    '''
             }
         }
