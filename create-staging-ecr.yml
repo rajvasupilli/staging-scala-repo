@@ -1,0 +1,81 @@
+
+Skip to content
+Pull requests
+Issues
+Marketplace
+Explore
+@rajvasupilli
+rajvasupilli /
+automated-fargate-poc
+
+1
+0
+
+    0
+
+Code
+Issues
+Pull requests
+Actions
+Projects
+Wiki
+Security
+Insights
+
+    Settings
+
+automated-fargate-poc/create-ecr.yml
+@rajvasupilli
+rajvasupilli Update create-ecr.yml
+Latest commit 30c78fd 5 minutes ago
+History
+1 contributor
+71 lines (69 sloc) 1.97 KB
+AWSTemplateFormatVersion: 2010-09-09
+Description: Creating ECS service
+Parameters:
+  DevECRName:
+    Type: String
+    Description: Name of the Dev ECR Repo
+    Default: dev-scala-image-repo
+  StagingECRName:
+    Type: String
+    Description: Name of the Staging ECR Repo
+    Default: staging-scala-image-repo
+  DevIAMUser:
+    Type: String
+    Description: User
+    Default: arn:aws:iam::827659600095:user/cloud_user
+  StagingIAMUser:
+    Type: String
+    Description: User
+    Default: arn:aws:iam::667333752349:user/pavan
+  AccountID:
+    Type: String
+    Description: AccountID
+    Default: 205376115077
+    
+Resources:       
+  STAGING-ECR: 
+    Type: AWS::ECR::Repository
+    Properties: 
+      RepositoryName: 
+         Ref: StagingECRName
+      RepositoryPolicyText: 
+        Version: "2012-10-17"
+        Statement: 
+          - 
+            Sid: AllowPushPull
+            Effect: Allow
+            Principal: 
+              AWS: 
+                Ref: StagingIAMUser
+            Action: 
+              - "ecr:GetDownloadUrlForLayer"
+              - "ecr:BatchGetImage"
+              - "ecr:BatchCheckLayerAvailability"
+              - "ecr:PutImage"
+              - "ecr:InitiateLayerUpload"
+              - "ecr:UploadLayerPart"
+              - "ecr:CompleteLayerUpload"
+           
