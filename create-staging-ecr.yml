@@ -16,6 +16,10 @@ Parameters:
   StagingIAMUser:
     Type: String
     Description: User
+    Default: arn:aws:iam::827659600095:user/cloud_user
+  StagingIAMUser:
+    Type: String
+    Description: User
     Default: arn:aws:iam::667333752349:user/pavan
   AccountID:
     Type: String
