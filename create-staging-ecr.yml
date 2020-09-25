@@ -23,7 +23,7 @@ Parameters:
     Default: 205376115077
     
 Resources:       
-  STAGING-ECR: 
+  STAGINGECR: 
     Type: AWS::ECR::Repository
     Properties: 
       RepositoryName: 
