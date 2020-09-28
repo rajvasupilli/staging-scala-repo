@@ -23,11 +23,11 @@ pipeline {
        stage('Push image from Dev to Staging ECR') {
             steps {
                 echo 'Build,Tag and Push the Docker Image into the ECR'
-                sh ''' aws ecr get-login-password --region ${params.REGION} | sudo docker login --username AWS --password-stdin 8${params.DEV_ACCOUNT_ID}.dkr.ecr.${params.REGION}.amazonaws.com
+                sh """ aws ecr get-login-password --region ${params.REGION} | sudo docker login --username AWS --password-stdin 8${params.DEV_ACCOUNT_ID}.dkr.ecr.${params.REGION}.amazonaws.com
                        sudo docker pull ${params.DEV_ACCOUNT_ID}.dkr.ecr.${params.REGION}.amazonaws.com/${params.DEV_REPO_NAME}:${params.IMAGE_TAG} 
                        sudo docker tag ${params.DEV_REPO_NAME}:${params.IMAGE_TAG}  ${params.STAGING_ACCOUNT_ID}.dkr.ecr.${params.REGION}.amazonaws.com/${params.STAGING_REPO_NAME}:${params.IMAGE_TAG}
                        sudo docker push ${params.STAGING_ACCOUNT_ID}.dkr.ecr.${params.REGION}.amazonaws.com/${params.STAGING_REPO_NAME}:${params.IMAGE_TAG}     
-                   '''
+                   """
             }
         }
     }
