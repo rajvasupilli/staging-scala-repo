@@ -13,7 +13,7 @@ pipeline {
     stages {
         stage('Install Pre-requisites') {
             steps {
-                echo 'Installling the prerequisites!!!'
+                echo 'Installing the prerequisites!!!'
                 sh '''
                       aws cloudformation create-stack --stack-name ecs-stack --template-body file://create-staging-ecr.yml --capabilities CAPABILITY_NAMED_IAM
                    '''
